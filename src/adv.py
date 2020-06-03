@@ -4,7 +4,7 @@ from room import Room
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mouth beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -38,6 +38,11 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = {
+    "name": "gordon",
+    "room": "outside",
+    "class": "strider"
+}
 
 # Write a loop that:
 #
@@ -49,3 +54,25 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+#welcome
+print("Welcome to Hoard")
+print("A text based hoarding game.")
+print(room[player["room"]].describeRoom())
+direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or Q to quit\n")).lower()
+
+
+while not direction == 'q':
+    
+    if direction == "n":
+        print("You go North")
+    elif direction == "e":
+        print("You go East")
+    elif direction == "s":
+        print("You go South")
+    elif direction == "w":
+        print("You go West")
+    else:
+        print("Please enter a valid direction")
+
+    direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or q to quit\n")).upper()
