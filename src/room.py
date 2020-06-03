@@ -1,4 +1,4 @@
-from textwrap import wrap 
+
 
 # Implement a class to hold room information. This should have name and
 # description attributes.
@@ -9,5 +9,5 @@ class Room:
     def __str__(self):
         return f"{self.name}, {self.description}"
     def describeRoom(self):
-        return wrap(f"{self.name}, {self.description}")
+        return f"Your current location: \n{self.name}.\n{self.description}\n\n"
     

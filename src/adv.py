@@ -1,4 +1,5 @@
 from room import Room
+from textwrap import wrap 
 
 # Declare all the rooms
 
@@ -57,22 +58,55 @@ player = {
 
 #welcome
 print("Welcome to Hoard")
-print("A text based hoarding game.")
+print("A text based hoarding adventure game.\n")
 print(room[player["room"]].describeRoom())
+
 direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or Q to quit\n")).lower()
 
 
 while not direction == 'q':
-    
     if direction == "n":
-        print("You go North")
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player["room"]].n_to:
+                    player["room"] = currentRoom
+                    break
+            print("You go North\n")
+            print(room[player["room"]].describeRoom())
+        except AttributeError:
+            print("There is nothing to the North")
     elif direction == "e":
-        print("You go East")
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player["room"]].e_to:
+                    player["room"] = currentRoom
+                    break
+            print("You go East\n")
+            print(room[player["room"]].describeRoom())
+        except AttributeError:
+            print("There is nothing to the East")
     elif direction == "s":
-        print("You go South")
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player["room"]].s_to:
+                    player["room"] = currentRoom
+                    break
+            print("You go South\n")
+            print(room[player["room"]].describeRoom())
+        except AttributeError:
+            print("There is nothing to the South")
     elif direction == "w":
-        print("You go West")
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player["room"]].w_to:
+                    player["room"] = currentRoom
+                    break
+            print("You go West\n")
+            print(room[player["room"]].describeRoom())
+        except AttributeError:
+            print("There is nothing to the West")
     else:
         print("Please enter a valid direction")
 
-    direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or q to quit\n")).upper()
+    direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or q to quit\n")).lower()
+    print("\n\n")
