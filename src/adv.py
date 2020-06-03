@@ -1,10 +1,12 @@
 from room import Room
+from textwrap import wrap 
+from player import Player
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mouth beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -38,6 +40,12 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+# player = {
+#     "name": "gordon",
+#     "room": "outside",
+#     "class": "strider"
+# }
+player = Player("gordon","outside","strider",["rusty knife","knapsack"])
 
 # Write a loop that:
 #
@@ -49,3 +57,62 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+#welcome
+print("Welcome to Hoard")
+print("A text based hoarding adventure game.\n")
+print(room[player.location].describeRoom())
+
+direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or Q to quit\n")).lower()
+
+
+while not direction == 'q':
+    if direction == "n":
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player.location].n_to:
+                    player.location = currentRoom
+                    break
+            print("You go North\n")
+            print(room[player.location].describeRoom())
+        except AttributeError:
+            print("There is nothing to the North")
+    
+    elif direction == "e":
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player.location].e_to:
+                    player.location = currentRoom
+                    break
+            print("You go East\n")
+            print(room[player.location].describeRoom())
+        except AttributeError:
+            print("There is nothing to the East")
+
+    elif direction == "s":
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player.location].s_to:
+                    player.location = currentRoom
+                    break
+            print("You go South\n")
+            print(room[player.location].describeRoom())
+        except AttributeError:
+            print("There is nothing to the South")
+
+    elif direction == "w":
+        try:
+            for currentRoom in room:
+                if room[currentRoom] == room[player.location].w_to:
+                    player.location = currentRoom
+                    break
+            print("You go West\n")
+            print(room[player.location].describeRoom())
+        except AttributeError:
+            print("There is nothing to the West")
+
+    else:
+        print("Please enter a valid direction")
+
+    direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or q to quit\n")).lower()
+    print("\n\n")
