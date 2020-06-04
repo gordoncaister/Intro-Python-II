@@ -6,21 +6,21 @@ from player import Player
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mouth beckons"),
+                     "North of you, the cave mouth beckons","outside"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""","foyer"),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""",'overlook'),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""",'narrow'),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""",'treasure'),
 }
 
 
@@ -100,6 +100,11 @@ while not direction == 'q':
         else:
             print("There is nothing to the West")
 
+    elif direction == "look":
+        itemsInRoom = room[player.location].listItems()
+        if not itemsInRoom == "":
+            print(f"Here are all the items in the room: {itemsInRoom}")
+
     else:
         print("Please enter a valid direction")
 
@@ -107,50 +112,3 @@ while not direction == 'q':
     print("\n\n")
 
 
-
- 
-    '''
-    if direction == "n":
-        try:
-            for currentRoom in room:
-                if room[currentRoom] == room[player.location].n_to:
-                    player.location = currentRoom
-                    break
-            print("You go North\n")
-            print(room[player.location].describeRoom())
-        except AttributeError:
-            print("There is nothing to the North")
-    
-    elif direction == "e":
-        try:
-            for currentRoom in room:
-                if room[currentRoom] == room[player.location].e_to:
-                    player.location = currentRoom
-                    break
-            print("You go East\n")
-            print(room[player.location].describeRoom())
-        except AttributeError:
-            print("There is nothing to the East")
-
-    elif direction == "s":
-        try:
-            for currentRoom in room:
-                if room[currentRoom] == room[player.location].s_to:
-                    player.location = currentRoom
-                    break
-            print("You go South\n")
-            print(room[player.location].describeRoom())
-        except AttributeError:
-            print("There is nothing to the South")
-
-    elif direction == "w":
-        try:
-            for currentRoom in room:
-                if room[currentRoom] == room[player.location].w_to:
-                    player.location = currentRoom
-                    break
-            print("You go West\n")
-            print(room[player.location].describeRoom())
-        except AttributeError:
-            print("There is nothing to the West")
-    '''

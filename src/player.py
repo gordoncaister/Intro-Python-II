@@ -11,6 +11,6 @@ class Player:
         return f"Player {self.name}, currently in room: { self.location }, currently has:{self.items}"
     
     def listItems(self):
-        joinedItems = self.items.join(", ")
+        joinedItems = self.items.join("\n")
         return f"Your items: {joinedItems}"
     
