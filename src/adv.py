@@ -107,21 +107,34 @@ while not direction == 'q':
             print(f"Here are all the items in the room: {itemsInRoom}")
         else:
             print("You look around, but it's just kind of bare. There are no items here.\n")
-    elif direction == "":
-        pass
-    elif direction == "take" and not noun == None:
+    elif direction == "i":
+        if player.listItems() != "":
+            print(player.listItems())
+        else:
+            print("Your inventory is empty")
+    elif direction == "get" and not noun == None:
         # if room[player.location].itemsInRoom
         itemsInRoom = room[player.location].itemsinroom
         itemInRoom = False
         for items in itemsInRoom:
             if noun in items.name:
-                print(f"You take the {noun}")
+                print(f"You get the {noun}")
                 room[player.location].itemsinroom.remove(items)
                 player.items.append(items)
                 itemInRoom = True
         if itemInRoom == False:
             print(f"You're looking for an item called: {noun}, but it doesn't exist in this room.\n")
-        
+    elif direction == "drop" and not noun == None:
+        itemsInInventory = player.items
+        itemInInventory = False
+        for items in itemsInInventory:
+            if noun in items.name:
+                print(f"You drop the {noun}")
+                room[player.location].itemsinroom.append(items)
+                player.items.remove(items)
+                itemInInventory = True
+        if itemInInventory == False:
+            print(f"You're looking for an item called: {noun}, but it doesn't exist in this room.\n")
     else:
         print("Please enter a valid direction")
 
