@@ -107,7 +107,7 @@ while not direction == 'q':
             print(f"Here are all the items in the room: {itemsInRoom}")
         else:
             print("You look around, but it's just kind of bare. There are no items here.\n")
-    elif direction == "i":
+    elif direction == "i" or direction == "inventory":
         if player.listItems() != "":
             print(player.listItems())
         else:
