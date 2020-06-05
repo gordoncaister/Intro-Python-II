@@ -45,7 +45,7 @@ earlier adventurers. The only exit is to the south.""",'treasure'),
 #     "room": "outside",
 #     "class": "strider"
 # }
-player = Player("gordon","outside","strider",["rusty knife","knapsack"])
+player = Player("gordon","outside","strider")
 
 # Write a loop that:
 #
@@ -63,8 +63,10 @@ print("Welcome to Hoard")
 print("A text based hoarding adventure game.\n")
 print(room[player.location].describeRoom())
 
-direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or Q to quit\n")).lower()
-
+direction = ""
+noun = None
+# str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or Q to quit\n")).lower()
+itemsInRoom = room[player.location].listItems()
 
 while not direction == 'q':
     if direction == "n":
@@ -75,7 +77,6 @@ while not direction == 'q':
         else:
             print("There is nothing to the North")
         
-    
     elif direction == "e":
         if not room[player.location].e_to(player.location) == None:
             player.location = room[player.location].e_to(player.location)
@@ -104,11 +105,36 @@ while not direction == 'q':
         itemsInRoom = room[player.location].listItems()
         if not itemsInRoom == "":
             print(f"Here are all the items in the room: {itemsInRoom}")
-
+        else:
+            print("You look around, but it's just kind of bare. There are no items here.\n")
+    elif direction == "":
+        pass
+    elif direction == "take" and not noun == None:
+        # if room[player.location].itemsInRoom
+        itemsInRoom = room[player.location].itemsinroom
+        itemInRoom = False
+        for items in itemsInRoom:
+            if noun in items.name:
+                print(f"You take the {noun}")
+                room[player.location].itemsinroom.remove(items)
+                player.items.append(items)
+                itemInRoom = True
+        if itemInRoom == False:
+            print(f"You're looking for an item called: {noun}, but it doesn't exist in this room.\n")
+        
     else:
         print("Please enter a valid direction")
 
-    direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or q to quit\n")).lower()
-    print("\n\n")
+    direction = str(input("Enter a cardinal direction: N, E, S, W to travel in that direction or q to quit\nYou can also use look to look around, if you find an item:\nTry typing 'take itemname' replacing itemname with the name of the item\n")).lower()
+
+    splitCommand = direction.split(" ")
+
+    direction = splitCommand[0]
+    if len(splitCommand) > 1:
+        noun = splitCommand[1]
+    else:
+        noun = None
+    
+    print("\n")
 
 
